@@ -1,0 +1,49 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { getToken, getUser, removeToken } from "../utils/auth";
+import { useNavigate, Link } from "react-router-dom";
+
+export default function Dashboard() {
+  const navigate = useNavigate();
+  const user = getUser();
+  const [articles, setArticles] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/articles", {
+        headers: { Authorization: `Bearer ${getToken()}` },
+      })
+      .then((res) => setArticles(res.data.data))
+      .catch((err) => console.error(err));
+  }, []);
+
+  const logout = () => {
+    removeToken();
+    navigate("/login");
+  };
+
+  return (
+    <div className="container py-4">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h3>Welcome, {user?.role === "super" ? "Super Admin" : "User"}</h3>
+        <button className="btn btn-outline-danger" onClick={logout}>Logout</button>
+      </div>
+
+      {user?.role === "super" && (
+        <Link to="/manage-users" className="btn btn-success mb-3">
+          Manage Users
+        </Link>
+      )}
+
+      <div className="list-group">
+        {articles.map((a) => (
+          <div key={a.id} className="list-group-item">
+            <h5>{a.title}</h5>
+            <p>{a.excerpt}</p>
+            <small className="text-muted">By {a.authorName}</small>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
