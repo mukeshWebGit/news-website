@@ -17,7 +17,10 @@ export default function DashboardLayout() {
   window.location.href = "/login";
 }
   return (
-    <div className="d-flex flex-column min-vh-100 bg-light text-dark">
+    <div
+      className="d-flex flex-column min-vh-100 text-dark"
+      style={{ backgroundColor: "#eff0f2" }}
+    >
       {/* Header */}
       <header className="bg-primary py-3 px-4 d-flex justify-content-between align-items-center text-white">
         {/* Left: Logo / Title */}
@@ -42,7 +45,7 @@ export default function DashboardLayout() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-light text-center border-top py-2 mt-auto text-secondary">
+      <footer className="text-center border-top py-2 mt-auto text-secondary">
         © {new Date().getFullYear()} News CMS. All rights reserved.
       </footer>
     </div>

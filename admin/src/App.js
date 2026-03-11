@@ -5,8 +5,9 @@ import EditArticle from "./pages/EditArticle";
 import ManageArticles from "./pages/ManageArticles";
 import AddUser from "./pages/AddUser";
 import ManageUsers from "./pages/ManageUsers";
+import ManageCategories from "./pages/ManageCategories";
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard"; // add this if not created yet 
+import Dashboard from "./pages/Dashboard"; 
 
 function App() {
  
@@ -23,6 +24,7 @@ function App() {
           <Route path="add-article" element={<AddArticle />} />
           <Route path="edit-article/:id" element={<EditArticle />} />
           <Route path="manage-articles" element={<ManageArticles />} />
+          <Route path="manage-categories" element={<ManageCategories />} />
           <Route path="add-user" element={<AddUser />} />
           <Route path="manage-users" element={<ManageUsers />} />
         </Route>

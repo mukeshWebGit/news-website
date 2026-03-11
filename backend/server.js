@@ -4,8 +4,11 @@ import dotenv from "dotenv";
 import cors from "cors";
 import multer from "multer";
 import articleRoutes from "./routes/articleRoutes.js";
+import categoryRoutes from "./routes/categoryRoutes.js";
+import { addCategory as addCategoryHandler } from "./controllers/categoryController.js";
 import seedRoutes from "./routes/seedRoutes.js"; // ✅ add this
 import Article from "./models/Article.js";
+import Category from "./models/Category.js";
 import authRoutes from "./routes/admin-auth.js";
 import adminAuthRoutes from "./routes/admin-auth.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -20,8 +23,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ register here
-app.use("/api/articles", articleRoutes); 
+// Category routes (explicit POST so it always works)
+app.post("/api/categories", addCategoryHandler);
+app.use("/api/articles", articleRoutes);
+app.use("/api/categories", categoryRoutes);
 app.use("/api/seed", seedRoutes);   // 👈 this is required
 app.use("/api/users", userRoutes);
 
@@ -166,12 +171,31 @@ const createSuperUser = async () => {
   console.log("🚀 Super user created with email: super@example.com | password: admin123");
 };
 
-createSuperUser();
+const DEFAULT_CATEGORIES = [
+  "Politics", "Sports", "Technology", "Business",
+  "Entertainment", "World", "Lifestyle",
+];
+
+const seedDefaultCategories = async () => {
+  let created = 0;
+  for (const name of DEFAULT_CATEGORIES) {
+    const exists = await Category.findOne({ name });
+    if (!exists) {
+      await Category.create({ name });
+      created++;
+      console.log("📁 Category created:", name);
+    }
+  }
+  const total = await Category.countDocuments();
+  console.log(`📁 Categories: ${total} in database (${created} seeded this run).`);
+};
 
 // start server
 const PORT = process.env.PORT || 5000;
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => {
+  .then(async () => {
+    await createSuperUser();
+    await seedDefaultCategories();
     app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
   })
   .catch(err => console.error(err));

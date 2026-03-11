@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchCategories } from "../utils/categories";
 
 export default function AddArticle() {
   const navigate = useNavigate(); 
@@ -9,6 +10,12 @@ export default function AddArticle() {
     content: "",
     category: "",
   });
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetchCategories().then(setCategories);
+  }, []);
 
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -94,21 +101,27 @@ export default function AddArticle() {
         )}
 
         {/* Category */}
-        <div className="mb-3"> 
+        <div className="mb-3">
+          <label className="form-label">Category</label>
+
           <select
-  className="border p-2 rounded w-full form-control"
-  value={form.category}
-  onChange={(e) => setForm({...form, category : e.target.value})}
->
-  <option value="">Select Category</option>
-  <option>Politics</option>
-  <option>Sports</option>
-  <option>Technology</option>
-  <option>Business</option>
-  <option>Entertainment</option>
-  <option>World</option>
-  <option>Lifestyle</option>
-</select>
+            className="border p-2 rounded w-full form-control"
+            value={form.category}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                category: e.target.value,
+              })
+            }
+            required
+          >
+            <option value="">Select Category</option>
+            {categories.map((cat) => (
+              <option key={cat._id ?? cat} value={cat.name ?? cat}>
+                {cat.name ?? cat}
+              </option>
+            ))}
+          </select>
         </div>
         {/* Content */}
         <div className="mb-3">

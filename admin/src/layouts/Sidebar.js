@@ -29,6 +29,11 @@ export default function Sidebar() {
                 <i className="bi bi-file-earmark-text me-2"></i> Manage Articles
               </Link>
             </li>
+            <li className="nav-item mb-2">
+              <Link to="/manage-categories" className="nav-link text-dark">
+                <i className="bi bi-tags me-2"></i> Manage Categories
+              </Link>
+            </li>
               {/* 🔥 ONLY SHOW IF SUPER ADMIN */}
         {isSuperAdmin && (
           <>
