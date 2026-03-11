@@ -55,7 +55,7 @@ export default function Home() {
       setLoading(true);
       setError("");
       try {
-        const catsRes = await fetch("http://localhost:5000/api/categories");
+        const catsRes = await fetch("https://news-backend-xrtf.onrender.com/api/categories");
         const catsJson = await catsRes.json();
         const list = catsJson?.data;
         const names = Array.isArray(list) && list.length ? list.map((c) => (c && c.name ? c.name : c)) : [];
@@ -66,7 +66,7 @@ export default function Home() {
         const results = await Promise.all(
           topCategories.map(async (cat) => {
             const res = await fetch(
-              `http://localhost:5000/api/articles?page=1&limit=3&category=${encodeURIComponent(cat)}`
+              `https://news-backend-xrtf.onrender.com/api/articles?page=1&limit=3&category=${encodeURIComponent(cat)}`
             );
             const json = await res.json();
             return [cat, json?.data || []];

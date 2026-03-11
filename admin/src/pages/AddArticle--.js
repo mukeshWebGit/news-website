@@ -31,7 +31,7 @@ export default function AddArticle() {
     formData.append("category", form.category);
     if (image) formData.append("image", image);
 
-    await fetch("http://localhost:5000/api/articles", {
+    await fetch("https://news-backend-xrtf.onrender.com/api/articles", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`, // now protected route

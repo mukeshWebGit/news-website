@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { getToken, getUser } from "../utils/auth";
 
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = "https://news-backend-xrtf.onrender.com/api";
 
 function StatCard({ title, value, subtitle, colorClass }) {
   return (

@@ -9,14 +9,14 @@ function NewsDetail() {
   const [article, setArticle] = useState(null);
   const [latest, setLatest] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/api/articles/${id}`)
+    fetch(`https://news-backend-xrtf.onrender.com/api/articles/${id}`)
       .then((res) => res.json())
       .then((data) => setArticle(data))
       .catch((err) => console.error(err));
   }, [id]);
 
    useEffect(() => {
-    fetch("http://localhost:5000/api/articles?page=1&limit=8")
+    fetch("https://news-backend-xrtf.onrender.com/api/articles?page=1&limit=8")
       .then((res) => res.json())
       .then((data) => { 
         const filtered = (data.data || []).filter((item) => String(item._id) !== String(id));

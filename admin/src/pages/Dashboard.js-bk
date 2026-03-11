@@ -10,7 +10,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/articles", {
+      .get("https://news-backend-xrtf.onrender.com/api/articles", {
         headers: { Authorization: `Bearer ${getToken()}` },
       })
       .then((res) => setArticles(res.data.data))

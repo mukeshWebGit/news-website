@@ -81,7 +81,7 @@ export default function CategoryPage() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/categories")
+    fetch("https://news-backend-xrtf.onrender.com/api/categories")
       .then((res) => res.json())
       .then((data) => {
         const list = data?.data;
@@ -105,7 +105,7 @@ export default function CategoryPage() {
       setError("");
       try {
         const res = await fetch(
-          `http://localhost:5000/api/articles?page=1&limit=9&category=${encodeURIComponent(
+          `https://news-backend-xrtf.onrender.com/api/articles?page=1&limit=9&category=${encodeURIComponent(
             categoryName
           )}`
         );
@@ -132,7 +132,7 @@ export default function CategoryPage() {
     setError("");
     try {
       const res = await fetch(
-        `http://localhost:5000/api/articles?page=${next}&limit=9&category=${encodeURIComponent(
+        `https://news-backend-xrtf.onrender.com/api/articles?page=${next}&limit=9&category=${encodeURIComponent(
           categoryName
         )}`
       );

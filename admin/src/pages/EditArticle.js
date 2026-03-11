@@ -22,11 +22,11 @@ export default function EditArticle() {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/articles/${id}`)
+    fetch(`https://news-backend-xrtf.onrender.com/api/articles/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setForm(data);
-        setPreview(data.image ? `http://localhost:5000${data.image}` : null);
+        setPreview(data.image ? `https://news-backend-xrtf.onrender.com${data.image}` : null);
         // ensure existing category is in list (e.g. from before categories were in DB)
         if (data.category) {
           setCategories((prev) => {
@@ -58,7 +58,7 @@ export default function EditArticle() {
       formData.append("image", form.newImage);
     }
 
-    await fetch(`http://localhost:5000/api/articles/${id}`, {
+    await fetch(`https://news-backend-xrtf.onrender.com/api/articles/${id}`, {
       method: "PUT", 
        body: formData,
     });

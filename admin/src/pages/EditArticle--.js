@@ -7,10 +7,10 @@ export default function EditArticle() {
   const [form, setForm] = useState({ title: "", authorName: "", content: "",category: "", image: null });
 const [preview, setPreview] = useState(null);
   useEffect(() => {
-    fetch(`http://localhost:5000/api/articles/${id}`)
+    fetch(`https://news-backend-xrtf.onrender.com/api/articles/${id}`)
       .then((res) => res.json())
       .then((data) => {setForm(data)
-      setPreview(data.image ? `http://localhost:5000${data.image}` : null); 
+      setPreview(data.image ? `https://news-backend-xrtf.onrender.com${data.image}` : null); 
       console.log("Fetched article for edit:", data);
       });
       
@@ -37,7 +37,7 @@ const [preview, setPreview] = useState(null);
       formData.append("image", form.newImage);
     }
 
-    await fetch(`http://localhost:5000/api/articles/${id}`, {
+    await fetch(`https://news-backend-xrtf.onrender.com/api/articles/${id}`, {
       method: "PUT", 
        body: formData,
     });

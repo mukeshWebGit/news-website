@@ -6,7 +6,7 @@ export default function ManageArticles() {
   const [articles, setArticles] = useState([]);
  // ✅ Fetch articles when page loads
   const fetchArticles = async () => {
-    fetch("http://localhost:5000/api/articles")
+    fetch("https://news-backend-xrtf.onrender.com/api/articles")
       .then((res) => res.json())
       .then((data) => setArticles(data.data || [])); 
   };
@@ -18,7 +18,7 @@ export default function ManageArticles() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this article?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/articles/${id}`); 
+      await axios.delete(`https://news-backend-xrtf.onrender.com/api/articles/${id}`); 
       alert("Article deleted successfully!");
       fetchArticles();
       

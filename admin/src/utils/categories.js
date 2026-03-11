@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:5000/api/categories";
+const API_BASE = "https://news-backend-xrtf.onrender.com/api/categories";
 
 export const DEFAULT_CATEGORIES = [
   "Politics",

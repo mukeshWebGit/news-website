@@ -13,7 +13,7 @@ const ManageUsers = () => {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/api/users", {
+      const res = await axios.get("https://news-backend-xrtf.onrender.com/api/users", {
         headers: { Authorization: `Bearer ${getToken()}` },
       });
       setUsers(res.data);
@@ -35,7 +35,7 @@ const ManageUsers = () => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       try {
        // const token = localStorage.getItem("token");
-        await axios.delete(`http://localhost:5000/api/users/${id}`, {
+        await axios.delete(`https://news-backend-xrtf.onrender.com/api/users/${id}`, {
           headers: { Authorization: `Bearer ${getToken()}` },
         });
         setUsers(users.filter((u) => u._id !== id));
@@ -59,7 +59,7 @@ const ManageUsers = () => {
       }
 
       await axios.put(
-        `http://localhost:5000/api/users/${selectedUser._id}`,
+        `https://news-backend-xrtf.onrender.com/api/users/${selectedUser._id}`,
         updatedData,
         { headers: { Authorization: `Bearer ${getToken()}` }, }
       );
